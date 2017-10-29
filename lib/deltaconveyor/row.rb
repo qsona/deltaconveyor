@@ -1,19 +1,21 @@
 module Deltaconveyor
   class Row
+    attr_accessor :container
+
     def self.from_json(row_json, container)
       raise 'You must implement .from_json method in class extends Row.'
     end
 
-    def self.update!(original, row, container)
-      raise 'You must implement .update! method in class extends Row.'
+    def update!(original)
+      raise 'You must implement #update! method in class extends Row.'
     end
 
-    def save!(container)
+    def save!
       raise 'You must implement #save! method in class extends Row.'
     end
 
     def key
-      raise 'You must implement #key method in class extends Row.'
+      :id
     end
 
     def valid?
