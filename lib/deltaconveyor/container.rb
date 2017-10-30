@@ -1,9 +1,9 @@
 module Deltaconveyor
   class Container
-    attr_accessor :config, :originals
+    attr_accessor :originals
 
-    def initialize
-      self.config = Deltaconveyor::Config.new
+    def initialize(originals: nil)
+      self.originals = originals
     end
   end
 end
