@@ -76,46 +76,6 @@ module Deltaconveyor
     arr.each do |elem|
       pk = keys.map { |key| elem.send(key) }
       unless hash[pk].nil?
-        option.logger.error "not unique key #{pk}"
-        raise 'Not Imported.'
-      end
-      hash[pk] = elem
-    end
-    hash
-
-    remove_keys.each do |key|
-      original_data = original_hash[key]
-      raise 'Bug.' unless original_data
-      option.logger.info "Remove #{key}"
-      original_data.destroy!
-    end
-    option.logger.info 'Removing Phase is finished.'
-
-    intersection_keys.each do |key|
-      original_data = original_hash[key]
-      new_data = new_hash[key]
-      raise 'Bug.' unless original_data && new_data
-
-      new_data.update!(original_data)
-    end
-    option.logger.info 'Updating Phase is finished.'
-
-    adding_keys.each do |key|
-      new_data = new_hash[key]
-      raise 'Bug.' unless new_data
-
-      option.logger.info "Insert #{key}"
-      new_data.save!
-    end
-    option.logger.info 'Adding Phase is finished.'
-    nil
-  end
-
-  def self.index_by_keys(arr, keys)
-    hash = {}
-    arr.each do |elem|
-      pk = keys.map { |key| elem.send(key) }
-      unless hash[pk].nil?
         option.logger.error "Error: not unique key #{pk}"
         raise 'Not Imported.'
       end
