@@ -14,10 +14,6 @@ module Deltaconveyor
       raise 'You must implement #save! method in class extends Row.'
     end
 
-    def key
-      :id
-    end
-
     def valid?
       raise 'You must implement #valid? method in class extends Row.'
     end
